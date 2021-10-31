@@ -60,10 +60,8 @@ function getAllData (urls, dataSplitters) {
                     }
                 }, true)
             ) {
-                console.log(allData);
                 resolve(allData);
             } else {
-                console.log(allData);
                 reject('There was an error getting the data.');
             }
         }, (200 * urls.length) + 1000);

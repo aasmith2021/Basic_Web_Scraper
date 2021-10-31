@@ -5,14 +5,22 @@ const getAllData = require('./getHttpData.js');
 const newFilePath = path.resolve(__dirname, 'test.csv');
 
 const urls = [
-    'http://cincinnatizoo.org/animals/african-painted-dog/',
-    'http://cincinnatizoo.org/animals/aardvark-2/',
-    'http://cincinnatizoo.org/animals/aardwolf/',
+    'http://cincinnatizoo.org/animals/'
 ];
 
+// const urls = [
+//     'http://cincinnatizoo.org/animals/african-painted-dog/',
+//     'http://cincinnatizoo.org/animals/aardvark-2/',
+//     'http://cincinnatizoo.org/animals/aardwolf/',
+// ];
+
+// const dataSplitters = [
+//     ['<h2>', ' <i'],
+//     ['"latin_name">(', ')'],
+// ];
+
 const dataSplitters = [
-    ['<h2>', ' <i'],
-    ['"latin_name">(', ')'],
+    ['<a  class="entry-title-link" rel="bookmark" href="', '"><span>']
 ];
 
 const handleError = (error) => {

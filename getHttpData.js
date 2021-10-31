@@ -1,9 +1,11 @@
 const http = require('http');
+const fs = require('fs');
 
 let allData = [];
 
 const getDataFromRequest = (res, dataSplitters) => {
     let data = '';
+
     res.on('data', (chunk) => {
         data += chunk;
     });
@@ -46,7 +48,7 @@ const getDataFromPage = (url, dataSplitters) => {
  */
 function getAllData (urls, dataSplitters) {
     for (const i in urls) {
-        setTimeout(() => getDataFromPage(urls[i], dataSplitters), (i * 200));
+        setTimeout(() => getDataFromPage(urls[i], dataSplitters), (i * 100));
     }
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -64,7 +66,7 @@ function getAllData (urls, dataSplitters) {
             } else {
                 reject('There was an error getting the data.');
             }
-        }, (200 * urls.length) + 1000);
+        }, (100 * urls.length) + 1000);
     })
 };
 

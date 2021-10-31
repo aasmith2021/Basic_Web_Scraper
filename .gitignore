@@ -1,3 +1,6 @@
+# Ignore getUrls.js
+getUrls.js
+
 # Logs
 logs
 *.log

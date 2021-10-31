@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const urls = require('./getCincyZooAnimalUrls.js');
+const urls = require('./urls.js');
 const dataSplitters = require('./dataSplitters.js');
 const getAllData = require('./getDataFromUrls.js');
 

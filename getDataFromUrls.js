@@ -14,7 +14,15 @@ const getDataFromRequest = (res, dataSplitters) => {
         const individualValues = [];
         for (const splitterPair of dataSplitters) {
             if (data.includes(splitterPair[0]) && data.split(splitterPair[0])[1].includes(splitterPair[1])) {
-                individualValues.push(data.split(splitterPair[0])[1].split(splitterPair[1])[0]);
+                let value = data.split(splitterPair[0])[1].split(splitterPair[1])[0];
+
+                // Wrap value in double quotes if it contains a comma so it is
+                // recognized as a single value for the .csv file
+                if (value.includes(',')) {
+                    value = `"${value}"`;
+                }
+
+                individualValues.push(value);
             } else {
                 individualValues.push('');
             }

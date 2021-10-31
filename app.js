@@ -1,16 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const pageUrls = require('./getUrls.js');
+const urls = require('./getUrls.js');
+const dataSplitters = require('./dataSplitters.js');
 const getAllData = require('./getHttpData.js');
 
 const newFilePath = path.resolve(__dirname, 'test.csv');
-
-const urls = pageUrls;
-
-const dataSplitters = [
-    ['<h2>', ' <i'],
-    ['"latin_name">(', ')'],
-];
 
 const handleError = (error) => {
     if (error) {

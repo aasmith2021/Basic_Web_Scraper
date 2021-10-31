@@ -14,7 +14,7 @@ const handleError = (error) => {
     }
 };
 
-const writeDataToFile = (allData) => {
+const writeDataToFile = async (allData) => {
     const allDataToWrite = allData.reduce((allData, data) => {
         allData += '\n' + data;
         return allData;
@@ -24,13 +24,12 @@ const writeDataToFile = (allData) => {
 };
 
 const run = async (urls, dataSplitters) => {
-    getAllData(urls, dataSplitters)
-        .then((allData) => {
-            writeDataToFile(allData);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    try {
+        const allData = await getAllData(urls, dataSplitters);
+        await writeDataToFile(allData);
+    } catch (e) {
+        console.log(e.message);
+    }
 };
 
 run(urls, dataSplitters);

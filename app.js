@@ -4,6 +4,17 @@ const getAllData = require('./getHttpData.js');
 
 const newFilePath = path.resolve(__dirname, 'test.csv');
 
+const urls = [
+    'http://cincinnatizoo.org/animals/african-painted-dog/',
+    'http://cincinnatizoo.org/animals/aardvark-2/',
+    'http://cincinnatizoo.org/animals/aardwolf/',
+];
+
+const dataSplitters = [
+    ['<h2>', ' <i'],
+    ['"latin_name">(', ')'],
+];
+
 const handleError = (error) => {
     if (error) {
         console.log(error);
@@ -21,8 +32,8 @@ const writeDataToFile = (allData) => {
     fs.writeFile(newFilePath, allDataToWrite, handleError);
 };
 
-const run = async () => {
-    getAllData()
+const run = async (urls, dataSplitters) => {
+    getAllData(urls, dataSplitters)
         .then((allData) => {
             writeDataToFile(allData);
         })
@@ -31,4 +42,4 @@ const run = async () => {
         });
 };
 
-run();
+run(urls, dataSplitters);

@@ -18,31 +18,12 @@ const getDataFromRequest = (res, dataSplitters) => {
             }
         }
 
-        console.log(individualValues);
-
         // Checks to make sure the line of data has at least one value. If it does,
-        // the csvLine is created and pushed onto allData
+        // the csvLine is created and pushed onto allData.
         if (individualValues.some((element) => element !== '')) {
             const csvLine = individualValues.join();
             allData.push(csvLine);
         }
-
-        // let name = '';
-        // let latinName = '';
-        // if (data.includes('<h2>') && data.split('<h2>')[1].includes(' <i')) {
-        //     name = data.split('<h2>')[1].split(' <i')[0];
-        // }
-
-        // if (data.includes('"latin_name">(') && data.split('"latin_name">(')[1].includes(')')) {
-        //     latinName = data.split('"latin_name">(')[1].split(')')[0];
-        // }
-
-        // if (name || latinName) {
-        //     csvLinePieces.push(name);
-        //     csvLinePieces.push(latinName);
-        //     const csvString = csvLinePieces.join();
-        //     allData.push(csvString);
-        // }
     });
 };
 
@@ -54,7 +35,16 @@ const getDataFromPage = (url, dataSplitters) => {
     request.end();
 };
 
-const getAllData = (urls, dataSplitters) => {
+/**
+ * Scrapes data from the provide page urls using the dataSplitters, and returns them as comma separated values in separate lines
+ * @param {String[]} urls - An array of the urls of the pages to scrape 
+ * @param {Array.<String[]>} dataSplitters - Array of data splitters.
+ * Each data splitter is an array that contains two strings: the html before the desired text to capture,
+ * and the html after the desired text to capture. Example dataSplitters argument:
+ * [ ['&lt;a&gt;', '&lt;/a&gt;'], ['&lt;p&gt;', '&lt;/p&gt;'] ]
+ * @returns {Promise} Promise object that represents the comma separated data scraped from the provided urls in separate lines
+ */
+function getAllData (urls, dataSplitters) {
     for (const i in urls) {
         setTimeout(() => getDataFromPage(urls[i], dataSplitters), (i * 200));
     }
